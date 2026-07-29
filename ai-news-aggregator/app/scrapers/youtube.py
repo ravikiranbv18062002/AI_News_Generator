@@ -53,8 +53,10 @@ class YouTubeScraper:
             text = " ".join([snippet.text for snippet in transcript.snippets])
             return Transcript(text=text)
         except (TranscriptsDisabled, NoTranscriptFound):
+            print(f"transcriptio eroor is {video_id}")
             return None
-        except Exception:
+        except Exception as e:
+            print(f"Error occurred while fetching transcript for {video_id}: {e}")
             return None
 
     def get_latest_videos(self, channel_id: str, hours: int = 24) -> list[ChannelVideo]:
